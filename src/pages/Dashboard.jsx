@@ -447,11 +447,11 @@ function Dashboard({ user, darkMode, onToggleTheme, onLogout }) {
               </div>
             </section>
           </div>
-          <footer className="footer">
+          <footer className="footer" aria-label="Informasi aplikasi">
             <span>© 2026 Mini Challenge AI</span>
             <span>
               Dibuat untuk terus bertumbuh{" "}
-              <span className="footer-spark">✦</span>
+              <Sparkles className="footer-spark" size={13} aria-hidden="true" />
             </span>
           </footer>
         </div>
