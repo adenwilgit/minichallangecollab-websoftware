@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+  background-color: #1a1a2e;
+  color: #e8e8e8;
+}
+
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.toggle-btn {
+  padding: 8px 20px;
+  background-color: #ececec;
+  border: none;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #1a1a1a;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.toggle-btn:hover {
+  background-color: #ddd;
+}
+
+body.dark .toggle-btn {
+  background-color: #2e2e4e;
+  color: #e8e8e8;
+}
+
+body.dark .toggle-btn:hover {
+  background-color: #3a3a5e;
+}
+
+/* CARD */
+.card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+body.dark .card {
+  background-color: #16213e;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.card h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+  transition: color 0.3s;
+}
+
+body.dark .card h2 {
+  color: #f0f0f0;
+}
+
+.card p {
+  font-size: 15px;
+  color: #4a6fa5;
+  transition: color 0.3s;
+}
+
+body.dark .card p {
+  color: #7a9fd4;
+}
