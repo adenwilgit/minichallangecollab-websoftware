@@ -689,6 +689,53 @@ button {
 .mission-form .primary-button {
   padding: 0 12px;
 }
+.mission-form .react-datepicker-wrapper {
+  min-width: 145px;
+  flex: 0.9;
+}
+.mission-form .react-datepicker-wrapper input {
+  width: 100%;
+}
+.react-datepicker {
+  overflow: hidden;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  font-family: "DM Sans", sans-serif;
+}
+.react-datepicker__header {
+  background: var(--surface-soft);
+  border-bottom: 1px solid var(--line);
+}
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header,
+.react-datepicker__day-name,
+.react-datepicker__day {
+  color: var(--text);
+}
+.react-datepicker__day:hover,
+.react-datepicker__month-text:hover,
+.react-datepicker__quarter-text:hover,
+.react-datepicker__year-text:hover {
+  background: var(--surface-soft);
+  border-radius: 6px;
+}
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  color: #fff;
+  background: var(--accent-deep);
+  border-radius: 6px;
+}
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--keyboard-selected:hover {
+  background: var(--accent);
+}
+.react-datepicker__navigation-icon::before {
+  border-color: var(--accent-deep);
+}
 .add-mission {
   display: flex;
   align-items: center;

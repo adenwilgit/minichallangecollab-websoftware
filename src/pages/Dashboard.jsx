@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import DatePicker, { registerLocale } from "react-datepicker";
+import { format } from "date-fns";
+import { id } from "date-fns/locale";
+import "react-datepicker/dist/react-datepicker.css";
 import {
   Activity,
   ArrowUpRight,
@@ -26,6 +30,8 @@ import {
   X,
 } from "lucide-react";
 
+registerLocale("id", id);
+
 const initialMissions = [
   {
     id: 1,
@@ -49,7 +55,7 @@ const initialMissions = [
     id: 3,
     title: "Review materi machine learning",
     category: "Data & Insight",
-    due: "20 Sep",
+    due: "29 Sep",
     progress: 100,
     color: "gold",
     completed: true,
@@ -64,11 +70,13 @@ const navItems = [
 ];
 
 function Dashboard({ user, darkMode, onToggleTheme, onLogout }) {
+  const [today, setToday] = useState(() => new Date());
   const [missions, setMissions] = useState(initialMissions);
   const [activeNav, setActiveNav] = useState("Ringkasan");
   const [showForm, setShowForm] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [newMission, setNewMission] = useState("");
+  const [newMissionDueDate, setNewMissionDueDate] = useState(new Date());
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   const completedCount = missions.filter((mission) => mission.completed).length;
@@ -76,6 +84,22 @@ function Dashboard({ user, darkMode, onToggleTheme, onLogout }) {
     missions.reduce((total, mission) => total + mission.progress, 0) /
       missions.length,
   );
+  const currentDateLabel = format(today, "EEEE, d MMMM yyyy", {
+    locale: id,
+  }).toLocaleUpperCase("id-ID");
+
+  useEffect(() => {
+    const now = new Date();
+    const nextMidnight = new Date(now);
+    nextMidnight.setHours(24, 0, 0, 0);
+
+    const timer = window.setTimeout(
+      () => setToday(new Date()),
+      nextMidnight.getTime() - now.getTime(),
+    );
+
+    return () => window.clearTimeout(timer);
+  }, [today]);
 
   function toggleMission(id) {
     setMissions((current) =>
@@ -100,7 +124,7 @@ function Dashboard({ user, darkMode, onToggleTheme, onLogout }) {
         id: Date.now(),
         title: newMission.trim(),
         category: "Personal Challenge",
-        due: "Minggu ini",
+        due: format(newMissionDueDate, "d MMM yyyy", { locale: id }),
         progress: 0,
         color: "lavender",
         completed: false,
@@ -274,7 +298,7 @@ function Dashboard({ user, darkMode, onToggleTheme, onLogout }) {
           <section className="welcome-row">
             <div>
               <p className="eyebrow">
-                <Sparkles size={15} /> MONDAY, 23 SEPTEMBER 2026
+                <Sparkles size={15} /> {currentDateLabel}
               </p>
               <h1>
                 Selamat datang, {user.role === "mentor" ? "Mentor" : "Aden"}
@@ -378,6 +402,15 @@ function Dashboard({ user, darkMode, onToggleTheme, onLogout }) {
                     value={newMission}
                     onChange={(event) => setNewMission(event.target.value)}
                     placeholder="Tulis misi baru..."
+                  />
+                  <DatePicker
+                    selected={newMissionDueDate}
+                    onChange={(date) => date && setNewMissionDueDate(date)}
+                    dateFormat="dd MMMM yyyy"
+                    minDate={new Date()}
+                    locale="id"
+                    aria-label="Tanggal tenggat misi"
+                    placeholderText="Pilih tenggat"
                   />
                   <button className="primary-button" type="submit">
                     Tambah <Plus size={15} />
