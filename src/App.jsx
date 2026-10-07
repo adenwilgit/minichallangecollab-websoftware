@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 
@@ -26,15 +27,38 @@ function App() {
     localStorage.removeItem("mini-challenge-user");
   }
 
-  if (!user) return <Login onLogin={handleLogin} />;
-
   return (
-    <Dashboard
-      user={user}
-      darkMode={darkMode}
-      onToggleTheme={() => setDarkMode((current) => !current)}
-      onLogout={handleLogout}
-    />
+    <Routes>
+      <Route
+        path="/login"
+        element={
+          user ? (
+            <Navigate to="/dashboard" replace />
+          ) : (
+            <Login onLogin={handleLogin} />
+          )
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          user ? (
+            <Dashboard
+              user={user}
+              darkMode={darkMode}
+              onToggleTheme={() => setDarkMode((current) => !current)}
+              onLogout={handleLogout}
+            />
+          ) : (
+            <Navigate to="/login" replace />
+          )
+        }
+      />
+      <Route
+        path="*"
+        element={<Navigate to={user ? "/dashboard" : "/login"} replace />}
+      />
+    </Routes>
   );
 }
 

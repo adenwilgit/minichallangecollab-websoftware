@@ -65,8 +65,6 @@ const initialMissions = [
 const navItems = [
   { label: "Ringkasan", icon: LayoutDashboard },
   { label: "Misi Saya", icon: Target },
-  { label: "Leaderboard", icon: Trophy },
-  { label: "Komunitas", icon: Users },
 ];
 
 function Dashboard({ user, darkMode, onToggleTheme, onLogout }) {
